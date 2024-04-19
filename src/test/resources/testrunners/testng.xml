@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="TestNG Regression Suite" verbose="3" thread-count="3" parallel="tests">
+
+
+	<test name="Google Test">
+		<parameter name="url" value="https://www.google.com" />
+		<parameter name="browser" value="chrome" />
+		<parameter name="headless" value="false" />
+		
+		<classes>
+			<class name="testngsessions.GoogleTestWithAssertions" />
+		</classes>
+	</test>
+
+
+	<test name="OrangeHRM Test">
+		<parameter name="url" value="https://orangehrm.com/en/30-day-free-trial" />
+		<parameter name="browser" value="firefox" />
+		<parameter name="headless" value="false" />
+
+		<classes>
+			<class name="testngsessions.OrangeHRMTest" />
+		</classes>
+	</test>
+
+
+	<test name="OpenCart Test">
+		<parameter name="url" value="https://naveenautomationlabs.com/opencart/index.php?route=account/login" />
+		<parameter name="browser" value="edge" />
+		<parameter name="headless" value="false" />
+
+		<classes>
+			<class name="testngsessions.OpenCartLoginTest" />
+		</classes>
+	</test>
+
+</suite>
+
+
+
+<!--In maven, non java files (.txt, .xml, json, excel) should not be create under
+main/java or test/java
+These are resources
+should be created under resources folder
+For java files we create a package and for reources we create a folder
+Create Source folder -> Create normal folder -> Create file
+
+3 test blocks. Every test block points to the respective test class
+
+verbose=3 The debugging level
+The higher the number, the more precise output we get is bcz of verbose
+minimum value 1 maximum value 10
+verbose=1 will give you less information in the console
+Always copy paste. This is not java code
+
+N number of parameters can be passed inside the test block
+
+parallel test run - thread-count="3" parallel="tests"
+parallel="tests" - The test blocks will be run in parallel mode
+thread-count="3" - Three threads will pick the the TCs randomly
+3 browsers will run at the same time
+The sequence doesn't matter. It is in key-value pair format
+
+1. thread-count="10" - 10 threads will be created. 3 threads will be occupied and 7 unnecessary threads
+are created in the memory
+
+2. If we have 100 test blocks and if thread-count="100" then 100 browsers will open. The system cannot handle it
+in terms of CPU and memory. This can be done with docker
+
+So give a reasonable value such as thread-count="5". At a time 5 threads will handle 5 TCs. once a thread has
+finished executing a test case, then it will pick another test. Use it carefully. Generally pick around 3-5 threads
+
+The parameter tag is for configuration data. Filling a form is test data and is not maintained in this file
+
+2 type of reports - index.html and emailable-report.html
+These reports are buggy. sometime it gives correct info and sometimes it doesn't
+emailable doesn't mean an email is sent out. testng cannot handle sending emails
+
+To exclude test blocks we can use the exclude tag but if we have 100 TCs we will have to add the tag many times
+Therefore it easier to comment it out
+-->
+
